@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Montar sistemas esenciales
+mount -t devtmpfs dev /dev
+mount -t proc proc /proc
+mount -t sysfs sys /sys
+
+# Crear consola virtual si no existe
+[ -c /dev/tty ] || mknod /dev/tty c 5 0
+chmod 666 /dev/tty
+
+# Opcional: mensaje de bienvenida
+echo "�Bienvenido a tu OS con Linux Kernel y terminal real!"
+#exec /bin/show_time.sh
+export PS1='\u@\h:\w\$ '
+
+exec /bin/sh
